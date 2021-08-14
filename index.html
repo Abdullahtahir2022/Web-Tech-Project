@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Dashboard - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+</head>
+
+<body id="page-top">
+    <script>
+        alert("Wait for API to load data");
+        var city = sessionStorage.getItem('city');
+    </script>
+
+    
+    <div id="wrapper">
+        
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-text mx-3"><span>Travel Guide</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul>
+                
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        
+        <div class="d-flex flex-column" id="content-wrapper">
+
+            <div id="content">
+                <div class="container-fluid">
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-dark mb-0">Restaurants</h3>
+                    </div>
+                    <div class="row" id="res">
+                  
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div class="container-fluid">
+                <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                    <h3 class="text-dark mb-0">Travel Spots</h3>
+                </div>
+                <div class="row" id="tra">
+      
+    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+<div class="d-flex flex-column" id="content-wrapper">
+    <div id="content">
+        <div class="container-fluid">
+            <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                <h3 class="text-dark mb-0">Transportation</h3>
+            </div>
+            <div class="row" id="bus">
+  
+</div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script>
+const settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://hotels4.p.rapidapi.com/locations/search?query="+city+"&locale=en_US",
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "f55a7d5474msh3c90a4ac2d6a2f9p1e67b7jsn865ef33b41f5",
+		"x-rapidapi-host": "hotels4.p.rapidapi.com"
+	}
+};
+
+
+ 
+
+
+
+
+
+
+
+
+
+$.ajax(settings).done(function (response) {
+
+    const hotels = [];
+    const des = [];
+    const travel = [];
+    
+    const array1 = response["suggestions"];
+    for (let i = 0; i < array1.length; i++) {
+
+    const array2 = array1[""+i+""];
+    console.log(array2)
+    if(array2["group"]== "TRANSPORT_GROUP"){
+        
+        const arr = array2["entities"];
+        for (let j = 0; j < arr.length; j++)
+        {
+            
+            const arr1 = arr[""+j+""];
+
+            travel.push(arr1["name"])
+            
+            
+
+
+        }
+
+        
+    }
+    if(array2["group"]== "HOTEL_GROUP"){
+        const arr = array2["entities"];
+
+        for (let j = 0; j < arr.length; j++)
+        {
+            const arr1 = arr[""+j+""];
+            hotels.push(arr1["name"])
+          
+
+
+        }
+
+        
+    }
+    if(array2["group"]== "LANDMARK_GROUP"){
+
+        const arr = array2["entities"];
+        for (let j = 0; j < arr.length; j++)
+        {
+            const arr1 = arr[""+j+""];
+            des.push(arr1["name"])
+            
+
+        }
+
+        
+    }
+
+    }
+
+    for(i = 0; i < hotels.length; i++) {
+    $('#res').append(' <div class="col-md-6 col-xl-3 mb-4">'+'<div class="card shadow border-left-primary py-2">'+
+                               '<div class="card-body">'
+                                   +' <div class="row align-items-center no-gutters">'
+                                        +'<div class="col mr-2">'
+                                         +'   <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span></span></div>'
+                                           +' <div class="text-dark font-weight-bold h5 mb-0"><span>'+hotels[i]+'</span></div>'
+                                     +'   </div>'
+                                       +' <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>'
+                                    +'</div>'
+                             +'   </div>'
+                             +'</div>');
+  }
+
+  for(i = 0; i < des.length; i++) {
+    $('#tra').append(' <div class="col-md-6 col-xl-3 mb-4">'+'<div class="card shadow border-left-primary py-2">'+
+                               '<div class="card-body">'
+                                   +' <div class="row align-items-center no-gutters">'
+                                        +'<div class="col mr-2">'
+                                         +'   <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span></span></div>'
+                                           +' <div class="text-dark font-weight-bold h5 mb-0"><span>'+des[i]+'</span></div>'
+                                     +'   </div>'
+                                       +' <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>'
+                                    +'</div>'
+                             +'   </div>'
+                             +'</div>');
+  }
+
+  for(i = 0; i < travel.length; i++) {
+    $('#bus').append(' <div class="col-md-6 col-xl-3 mb-4">'+'<div class="card shadow border-left-primary py-2">'+
+                               '<div class="card-body">'
+                                   +' <div class="row align-items-center no-gutters">'
+                                        +'<div class="col mr-2">'
+                                         +'   <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span></span></div>'
+                                           +' <div class="text-dark font-weight-bold h5 mb-0"><span>'+travel[i]+'</span></div>'
+                                     +'   </div>'
+                                       +' <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>'
+                                    +'</div>'
+                             +'   </div>'
+                             +'</div>');
+  }
+
+    
+});
+
+
+
+</script>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+    <link rel="stylesheet" href="assets/css/OcOrato---Login-form-1.css">
+    <link rel="stylesheet" href="assets/css/OcOrato---Login-form.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<script>
+function fun(){
+
+    var city = document.getElementById("city").value;
+    sessionStorage.setItem("city", city);
+    location.href = 'index.html';
+    
+}
+
+</script>
+
+<body>
+    <form id="form" style="font-family:Quicksand, sans-serif;background-color:rgba(44,40,52,0.73);width:320px;padding:40px;">
+        <h1 id="head" style="color:rgb(193,166,83);">Travel Guide</h1>
+        <div></div>
+        <div class="form-group"><input class="form-control" type="text" id="city" placeholder="Enter City name"></div><button onclick="fun()" class="btn btn-light" id="butonas" style="width:100%;height:100%;margin-bottom:10px;background-color:rgb(106,176,209);" type="button">Search</button>
+    </form>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
